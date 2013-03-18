@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script src="http://yandex.st/json2/2011-10-19/json2.min.js"></script>    
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <title>Badge Admin</title>
+  </head>
+  <body>
+    <!-- <form action="/badge" method="post"> -->
+    <form id="badgeForm">
+      <h2>Badge Details</h2>
+      <div>
+        Badge Name: <input type="text" size="50" id="name" value="" />
+      </div>
+      <div>
+        Badge Version: <input type="text" size="50" id="version" value="" />
+      </div>
+      <div>
+        Badge Description: <input type="textarea" cols="50" rows="5" id="description" value="" />
+      </div>
+      <div>
+        Badge Image: <input type="file" name="badgeImage" />
+      </div>
+      <div>
+        <input type="submit" value="Save Badge" />
+      </div>
+      <div id="resultHeader" style="font-variant:small-caps; font-weight: bolder; font-size: large;">
+      </div>
+      <div id="results" style="font-size: medium;">
+      </div>
+    </form>
+  </body>
+</html>
+<script type="text/javascript">
+</script>

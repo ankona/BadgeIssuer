@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script src="http://beta.openbadges.org/issuer.js"></script>
+    <script src="http://yandex.st/json2/2011-10-19/json2.min.js"></script>    
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+    <title>Test Badge Issue</title>
+  </head>
+  <body>
+    <!-- <form action="/badge" method="post"> -->
+    <form id="badgeForm">
+      <div>
+        <input type="text" size="50" id="email" value="chris_a_mcbride@hotmail.com" />
+      </div>
+      <div>
+          <select id="badgeid">
+            <option value="0" selected="true">0</value>
+            <option value="1">1</value>
+            <option value="2">2</value>
+            <option value="3">3</value>
+            <option value="4">4</value>
+            <option value="5">5</value>
+            <option value="6">6</value>
+            <option value="7">7</value>
+            <option value="8">8</value>
+            <option value="9">9</value>
+            <option value="10">10</value>
+          </select>
+      </div>
+      <div>
+        <input type="submit" value="Issue Badge" />
+      </div>
+      <div id="resultHeader" style="font-variant:small-caps; font-weight: bolder; font-size: large;">
+      </div>
+      <div id="results" style="font-size: medium;">
+      </div>
+    </form>
+  </body>
+</html>
+<script type="text/javascript">
+  var assertion = null;
+
+  $("#badgeForm").submit(function() {
+    IssueBadge();
+    //GetBadgeAssertion();
+    return false;
+  });
+
+  function onComplete(data, textStatus, jqXHR) {    
+    $("#resultHeader").html("result: " + textStatus);
+    $("#results").html(JSON.stringify(data));
+
+    if(jqXHR.status == 200) {
+      assertion = data;      
+      IssueBadge();
+    }    
+  }
+
+  function GetBadgeAssertion() {
+    var email = $("#email").val();
+    var badgeid = $("#badgeid").val();
+
+    jQuery.getJSON("/badge",{"email":email,"badgeid":badgeid},onComplete,"json");    
+  }
+
+  function IssueBadge() {
+    var email = $("#email").val();
+    var badgeid = $("#badgeid").val();
+
+    OpenBadges.issue(['http://mcbridebadgeissuer.appspot.com/badge?email=' + email + '&badgeid=' + badgeid],
+      function(errors, successes) {
+        for(var i=0; i<errors.length; i++) {
+          $("#results").append("<div><b>" + errors[i].reason + "</b><br />" + errors[i].url + "<br /></div>")
+        }
+
+        for(var i=0; i<successes.length; i++) {
+          $("#results").append("<div><b>" + successes[i].reason + "</b><br />" + successes[i].url + "<br /></div>")
+        }
+    });
+  }
+</script>

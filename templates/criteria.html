@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>{{ badgeName }} Criteria</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+  </head>
+  <body>
+    <div style="width: 50%">
+      <div id="badgeTitle" style="font-weight: bolder; font-size: larger;">
+        "{{ badgeName }}" Badge Criteria
+      </div>
+      <div id="badgeImage" style="float:right;">
+        <img src="{{ badgeImageUrl}}" alt="{{ badgeName }}" />
+      </div>
+      <div id="badgeDescription">
+        {{ description }}
+      </div>
+      <div id="badgeCriteria" style="font-weight: bolder; font-size: large;">
+        People with this badge have demonstrated the following skills:
+      </div>
+      <div id="taskList">
+        <ul>
+        {% for prerequisite in prerequisites %}
+          <li>{{ prerequisite }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    <div>
+  </body>
+</html>
+<script type="text/javascript">
+</script>
